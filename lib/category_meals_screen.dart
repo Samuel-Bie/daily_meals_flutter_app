@@ -6,6 +6,9 @@ class CategoryMealsScreen extends StatelessWidget {
   // final Category category;
   // const CategoryMealsScreen( this.category,{Key key}) : super(key: key);
 
+  static const routeName = '/category-meals';
+
+
   @override
   Widget build(BuildContext context) {
     final routeArgs = ModalRoute.of(context).settings.arguments as Category;

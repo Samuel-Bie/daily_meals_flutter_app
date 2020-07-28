@@ -1,6 +1,7 @@
-import 'package:daily_meals/screens/category_meals_screen.dart';
-import 'package:daily_meals/models/category.dart';
 import 'package:flutter/material.dart';
+
+import 'package:daily_meals/models/category.dart';
+import 'package:daily_meals/screens/category_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category category;

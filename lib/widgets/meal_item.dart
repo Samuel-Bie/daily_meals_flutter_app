@@ -4,19 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:daily_meals/models/meal.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem({
-    Key key,
-    @required this.meal,
-    @required this.deleteFunction
-  }) : super(key: key);
+  const MealItem({Key key, @required this.meal, this.deleteFunction})
+      : super(key: key);
 
   final Meal meal;
   final Function deleteFunction;
 
-  void _selectMeal (BuildContext context) {
-    Navigator.pushNamed(context, MealDetailsScreen.routeName, arguments: meal).then((value) {
-      if(value != null)
-        this.deleteFunction(meal);
+  void _selectMeal(BuildContext context) {
+    Navigator.pushNamed(context, MealDetailsScreen.routeName, arguments: meal)
+        .then((value) {
+      if (value != null) this.deleteFunction(meal);
     });
   }
 

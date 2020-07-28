@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> availableMeals = DUMMY_MEALS;
+  List<Meal> favorites = [];
 
   void _updateFilters(Map<String, bool> newFilters) {
     print(newFilters);
@@ -41,6 +42,21 @@ class _MyAppState extends State<MyApp> {
             meal.isLactoseFree == _filters['lactose'];
       }).toList();
     });
+  }
+
+  void _toogleFavoriteMeal(Meal meal) {
+    if (favorites.contains(meal))
+      setState(() {
+        favorites.remove(meal);
+      });
+    else
+      setState(() {
+        favorites.add(meal);
+      });
+  }
+
+  bool _isMealFavorite(Meal meal) {
+    return favorites.contains(meal);
   }
 
   @override
@@ -82,10 +98,12 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: '/', // default is '/'
       routes: {
-        '/': (ctx) => TabsScreen(),
+        '/': (ctx) => TabsScreen(favorites),
         CategoryMealsScreen.routeName: (ctx) =>
             CategoryMealsScreen(availableMeals),
-        MealDetailsScreen.routeName: (ctx) => MealDetailsScreen(),
+        MealDetailsScreen.routeName: (ctx) => MealDetailsScreen(
+            toogleFavoriteMeal: _toogleFavoriteMeal,
+            isMealFavorite: _isMealFavorite),
         FiltersScreen.routeName: (ctx) => FiltersScreen(
               updateFilters: _updateFilters,
               currentFilters: _filters,

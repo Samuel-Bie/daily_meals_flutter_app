@@ -1,3 +1,4 @@
+import 'package:daily_meals/models/meal.dart';
 import 'package:flutter/material.dart';
 
 import 'package:daily_meals/screens/categories_screen.dart';
@@ -5,7 +6,8 @@ import 'package:daily_meals/screens/favorites_screen.dart';
 import 'package:daily_meals/widgets/main_drawer_widget.dart';
 
 class TabsScreen extends StatefulWidget {
-  TabsScreen({Key key}) : super(key: key);
+  final List<Meal> favorites;
+  TabsScreen(this.favorites, {Key key}) : super(key: key);
 
   @override
   _TabsScreenState createState() => _TabsScreenState();
@@ -18,25 +20,26 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   int _selectedPageIndex = 0;
-  List<Map<String, Object>> _pages = [
-    {
-      'page': CategoriesScreen(),
-      'title': 'Categories'
-    }, {
-      'page': FavoritesScreen(),
-      'title': 'Favorites'
-    },
-  ];
+  List<Map<String, Object>> _pages = [];
   void _selectPage(int index) {
     setState(() {
       _selectedPageIndex = index;
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      {'page': CategoriesScreen(), 'title': 'Categories'},
+      {'page': FavoritesScreen(this.widget.favorites), 'title': 'Favorites'}
+    ];
+  }
+
   Widget buildTabOntheBottom(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text( _pages[_selectedPageIndex]['title']),
+        title: Text(_pages[_selectedPageIndex]['title']),
       ),
       drawer: MainDrawer(),
       body: _pages[_selectedPageIndex]['page'],
@@ -76,7 +79,7 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
         body: TabBarView(children: [
           CategoriesScreen(),
-          FavoritesScreen(),
+          FavoritesScreen(this.widget.favorites),
         ]),
       ),
     );

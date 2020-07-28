@@ -1,4 +1,6 @@
+import 'package:daily_meals/screens/filters_screen.dart';
 import 'package:daily_meals/screens/meal_details_screem.dart';
+import 'package:daily_meals/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:daily_meals/screens/categories_screen.dart';
@@ -33,14 +35,26 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Color.fromRGBO(20, 51, 51, 1),
               ),
+              headline1: TextStyle(
+                fontSize: 30,
+                fontFamily: 'RobotoCondensed',
+                fontWeight: FontWeight.w900,
+                color: Colors.pink,
+              ),
+              headline2: TextStyle(
+                fontSize: 24,
+                fontFamily: 'RobotoCondensed',
+                fontWeight: FontWeight.bold,
+              ),
             ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: '/', // default is '/'
       routes: {
-        '/': (ctx) => CategoriesScreen(),
+        '/': (ctx) => TabsScreen(),
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
         MealDetailsScreen.routeName: (ctx) => MealDetailsScreen(),
+        FiltersScreen.routeName: (ctx) => FiltersScreen(),
       },
       onGenerateRoute: (settings) {
         print(settings.arguments);

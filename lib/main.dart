@@ -1,3 +1,5 @@
+import 'package:daily_meals/categories_screen.dart';
+import 'package:daily_meals/category_meals_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,42 +13,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My meals',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
+        accentColor: Colors.amber,
+        canvasColor: Color.fromRGBO(255, 254, 229, 1),
+        fontFamily: 'Raleway',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              bodyText1: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
+              bodyText2: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
+              subtitle1: TextStyle(
+                  fontSize: 24,
+                  fontFamily: 'RobotoCondensed',
+                  color: Color.fromRGBO(20, 51, 51, 1)),
+            ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('SamMeals'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              'Meals',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      // This trailing comma makes auto-formatting nicer for build methods.
+      home: CategoriesScreen(),
+      routes: {'/category-meals': (ctx) => CategoryMealsScreen()},
     );
   }
 }

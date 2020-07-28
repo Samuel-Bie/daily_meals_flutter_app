@@ -26,6 +26,10 @@ class Meal {
   final bool isVegetarian;
   final bool isLactoseFree;
 
+  String get complexityText {
+    return this.complexity == Complexity.Simple ? 'Simple': this.complexity == Complexity.Challenging ? 'Challenging': 'Hard';
+  }
+
   const Meal({
     @required this.id,
     @required this.categories,

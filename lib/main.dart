@@ -3,15 +3,46 @@ import 'package:daily_meals/screens/meal_details_screem.dart';
 import 'package:daily_meals/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'package:daily_meals/screens/categories_screen.dart';
+import 'package:daily_meals/data/dummy_data.dart';
+
 import 'package:daily_meals/screens/category_meals_screen.dart';
+
+import 'models/meal.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Map<String, bool> _filters = {
+    'gluten': true,
+    'vegan': true,
+    'vegetarian': true,
+    'lactose': true,
+  };
+
+  List<Meal> availableMeals = DUMMY_MEALS;
+
+  void _updateFilters(Map<String, bool> newFilters) {
+    print(newFilters);
+    setState(() {
+      _filters = newFilters;
+
+      availableMeals = DUMMY_MEALS.where((meal) {
+        return meal.isGlutenFree == _filters['gluten'] &&
+            meal.isVegan == _filters['vegan'] &&
+            meal.isVegetarian == _filters['vegetarian'] &&
+            meal.isLactoseFree == _filters['lactose'];
+      }).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,16 +83,21 @@ class MyApp extends StatelessWidget {
       initialRoute: '/', // default is '/'
       routes: {
         '/': (ctx) => TabsScreen(),
-        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+        CategoryMealsScreen.routeName: (ctx) =>
+            CategoryMealsScreen(availableMeals),
         MealDetailsScreen.routeName: (ctx) => MealDetailsScreen(),
-        FiltersScreen.routeName: (ctx) => FiltersScreen(),
+        FiltersScreen.routeName: (ctx) => FiltersScreen(
+              updateFilters: _updateFilters,
+              currentFilters: _filters,
+            ),
       },
       onGenerateRoute: (settings) {
         print(settings.arguments);
         // MaterialPageRoute(builder: (ctx)=> CategoryMealsScreen());
       },
       onUnknownRoute: (settings) {
-        MaterialPageRoute(builder: (ctx) => CategoryMealsScreen());
+        MaterialPageRoute(
+            builder: (ctx) => CategoryMealsScreen(availableMeals));
       },
     );
   }

@@ -113,9 +113,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
 class MySwitchTile extends StatelessWidget {
   const MySwitchTile({
     Key key,
-    @required bool this.value,
-    @required String this.text,
-    @required Function this.handler,
+    @required this.value,
+    @required this.text,
+    @required this.handler,
     this.description,
   });
 

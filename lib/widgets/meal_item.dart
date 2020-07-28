@@ -1,3 +1,4 @@
+import 'package:daily_meals/screens/meal_details_screem.dart';
 import 'package:flutter/material.dart';
 
 import 'package:daily_meals/models/meal.dart';
@@ -10,12 +11,14 @@ class MealItem extends StatelessWidget {
 
   final Meal meal;
 
-  void _selectMeal(Meal meal) {}
+  void _selectMeal (BuildContext context) {
+    Navigator.pushNamed(context, MealDetails.routeName, arguments: meal);
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => _selectMeal(context),
       child: Card(
         child: Column(
           children: <Widget>[
@@ -56,28 +59,34 @@ class MealItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Expanded(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.schedule),
-                        SizedBox(
-                          width: 6,
-                        ),
-                        Text('${meal.duration} min'),
-                      ],
-                    ),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.schedule),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Text('${meal.duration} min'),
+                    ],
                   ),
-                  Expanded(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.work),
-                        SizedBox(
-                          width: 6,
-                        ),
-                        Text('${meal.complexityText}'),
-                      ],
-                    ),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.work),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Text('${meal.complexityText}'),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.attach_money),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Text('${meal.affordabilityText}'),
+                    ],
                   ),
                 ],
               ),

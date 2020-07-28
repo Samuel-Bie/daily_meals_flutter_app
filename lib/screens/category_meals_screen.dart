@@ -10,14 +10,14 @@ class CategoryMealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final routeArgs = ModalRoute.of(context).settings.arguments as Category;
+    final category = ModalRoute.of(context).settings.arguments as Category;
     final meals = DUMMY_MEALS.where((meal) {
-      return meal.categories.contains(routeArgs.id);
+      return meal.categories.contains(category.id);
     }).toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(routeArgs.title),
+        title: Text(category.title),
       ),
       body: ListView.builder(
         itemBuilder: (ctx, index) {

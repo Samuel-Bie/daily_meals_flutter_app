@@ -29,6 +29,10 @@ class Meal {
   String get complexityText {
     return this.complexity == Complexity.Simple ? 'Simple': this.complexity == Complexity.Challenging ? 'Challenging': 'Hard';
   }
+  String get affordabilityText {
+    return this.affordability == Affordability.Affordable ? 'Affordable': this.affordability == Affordability.Luxurious ? 'Luxurious': 'Pricey';
+
+  }
 
   const Meal({
     @required this.id,

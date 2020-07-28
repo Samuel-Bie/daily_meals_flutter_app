@@ -23,9 +23,16 @@ class MyApp extends StatelessWidget {
               bodyText1: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
               bodyText2: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
               subtitle1: TextStyle(
-                  fontSize: 24,
-                  fontFamily: 'RobotoCondensed',
-                  color: Color.fromRGBO(20, 51, 51, 1)),
+                fontSize: 24,
+                fontFamily: 'RobotoCondensed',
+                color: Color.fromRGBO(20, 51, 51, 1),
+              ),
+              subtitle2: TextStyle(
+                fontSize: 20,
+                fontFamily: 'RobotoCondensed',
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(20, 51, 51, 1),
+              ),
             ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -33,7 +40,14 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (ctx) => CategoriesScreen(),
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
-        MealDetails.routeName: (ctx) => MealDetails(),
+        MealDetailsScreen.routeName: (ctx) => MealDetailsScreen(),
+      },
+      onGenerateRoute: (settings) {
+        print(settings.arguments);
+        // MaterialPageRoute(builder: (ctx)=> CategoryMealsScreen());
+      },
+      onUnknownRoute: (settings) {
+        MaterialPageRoute(builder: (ctx) => CategoryMealsScreen());
       },
     );
   }

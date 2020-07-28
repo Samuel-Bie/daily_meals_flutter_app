@@ -12,7 +12,7 @@ class MealItem extends StatelessWidget {
   final Meal meal;
 
   void _selectMeal (BuildContext context) {
-    Navigator.pushNamed(context, MealDetails.routeName, arguments: meal);
+    Navigator.pushNamed(context, MealDetailsScreen.routeName, arguments: meal);
   }
 
   @override
